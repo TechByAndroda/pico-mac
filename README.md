@@ -181,6 +181,26 @@ time is a pain – I ended up moving to SWD probe programming.)
 
 The LED should flash at about 2Hz once powered up.
 
+# Build Summary:
+
+## Building umac
+cd pico-mac
+
+cd external/umac
+make MEMSIZE=208 DISP_WIDTH=640 DISP_HEIGHT=480
+cd ../..
+./external/umac/main -r '4D1F8172 - MacPlus v3.ROM' -W rom.bin
+
+## Building pico-mac
+mkdir incbin
+xxd -i < rom.bin > incbin/umac-rom.h
+
+mkdir build
+cd build
+cmake .. -DMEMSIZE=208 -DUSE_SD=true -DUSE_VGA_RES=1
+cd ..
+make -C build
+
 # Hardware contruction
 
 It's a simple circuit in terms of having few components: just the
