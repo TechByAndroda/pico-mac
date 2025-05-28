@@ -185,7 +185,7 @@ static void     video_prep_buffer()
         unsigned int porch_padding = (VIDEO_HRES - VIDEO_FB_HRES)/2;
         // FIXME: HBP/HFP are prob off by one or so, check
         uint32_t timing = ((VIDEO_HSW - 1) << 23) |
-                ((VIDEO_HBP + porch_padding - 3) << 15) |
+                ((VIDEO_HBP + porch_padding - 5) << 15) |
                 ((VIDEO_HFP + porch_padding - 4) << 7);
         video_dma_cfg[0] = timing | 0x80000000;
         video_dma_cfg[1] = VIDEO_FB_HRES - 1;
